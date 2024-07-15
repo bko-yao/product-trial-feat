@@ -1,0 +1,17 @@
+<div class="app-frame" *ngIf="payload$ | async as pl">
+  <app-table
+    class="table"
+    [data]="pl.products"
+    [totalRecords]="pl.total"
+    [config]="conf"
+    [entity]="entity"
+    [selectable]="true"
+    (saved)="onSave($event)"
+    [editedEntry] = ""
+    (deleted)="onDeleteProduct($event)"
+    (getProduct)="getProduct($event)"
+    [multiSelect]="false"
+    [lazy]="false"
+    (lazyLoaded)="loadData($event)">
+  </app-table>
+</div>

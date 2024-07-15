@@ -1,0 +1,28 @@
+version: '2'
+
+services:
+
+  back-product-trial:
+    image: 'product_trial:latest'
+    container_name: back-product-trial-container
+    ports:
+      - "8081:8081"
+    depends_on:
+      - product-trial-database
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://product-trial-database:5432/product_trial
+      - SPRING_DATASOURCE_USERNAME=bko
+      - SPRING_DATASOURCE_PASSWORD=bko
+      - JAVA_OPTS=-Xmx8g
+
+  product-trial-database:
+    image: 'postgres:13.1-alpine'
+    container_name: product-trial-database
+    ports:
+      - "5432:5432"
+    volumes:
+      - /home/data/postgres:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=bko
+      - POSTGRES_PASSWORD=bko
+      - POSTGRES_DB=product_trial
